@@ -1,30 +1,42 @@
-from django.http import HttpResponse, JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from rest_framework.parsers import JSONParser
-from backend.models import Case, Cite
-from backend.serializers import CaseSerializer, CiteSerializer
+
+from rest_framework import generics, permissions
+from backend.models import Case, Cite, CustomUser
+from backend.serializers import CaseSerializer, CiteSerializer, UserSerializer
 
 
-@csrf_exempt
-def case_list(request):
+class CaseList(generics.ListCreateAPIView):
     """
     List all cases
     """
-    if request.method == 'GET':
-        cases = Case.objects.all()
-        serializer = CaseSerializer(cases, many=True)
-        return JsonResponse(serializer.data, safe=False)
+    queryset = Case.objects.all()
+    serializer_class = CaseSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     
 
-def cite_list(request):
-    if request.method == 'GET':
-        cites = Case.objects.all()
-        serializer = CiteSerializer(cites, many=True)
-        return JsonResponse(serializer.data, safe=False)
-    if request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = CiteSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
+class CiteList(generics.ListCreateAPIView):
+    
+    queryset = Cite.objects.all()
+    serializer_class = CiteSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(owner = self.request.user)
+
+
+class CiteDetail(generics.RetrieveUpdateDestroyAPIView):
+    """
+    Retrieve, update, or delete a cite
+    """
+    queryset = Cite.objects.all()
+    serializer_class = CiteSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+class UserList(generics.ListAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = UserSerializer
+
+
+class UserDetail(generics.RetrieveAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = UserSerializer
