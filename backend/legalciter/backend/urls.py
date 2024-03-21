@@ -1,14 +1,13 @@
-from django.urls import path
-from rest_framework.urlpatterns import format_suffix_patterns
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 from . import views
 
 
-urlpatterns = [
-    path('cases/', views.CaseList.as_view()),
-    path('cites/', views.CiteList.as_view()),
-    path('cites/<int:pk>/', views.CiteDetail.as_view()),
-    path('users/', views.UserList.as_view()),
-    path('users/<int:pk>/', views.UserDetail.as_view()),
-]
+router = DefaultRouter()
+router.register(r'cases', views.CaseViewSet)
+router.register(r'cites', views.CiteViewSet)
+router.register(r'users', views.UserViewSet)
 
-urlpatterns = format_suffix_patterns(urlpatterns)
+urlpatterns = [
+    path('', include(router.urls))
+]

@@ -2,6 +2,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from pygments.formatters.html import HtmlFormatter
 
 from .managers import CustomUserManager
     
@@ -19,6 +20,7 @@ class Case(models.Model):
     
     def save(self, *args, **kwargs):
         options = {'title': self.title} if self.title else {}
+        formatter = HtmlFormatter(full=True, **options)
         super().save(*args, **kwargs)
     
 
@@ -36,6 +38,7 @@ class Cite(models.Model):
     
     def save(self, *args, **kwargs):
         options = {'name': self.name} if self.name else {}
+        formatter = HtmlFormatter(full=True, **options)
         super().save(*args, **kwargs)
 
 

@@ -2,23 +2,23 @@ from rest_framework import serializers
 from backend.models import Case, Cite, CustomUser
 
 
-class CaseSerializer(serializers.ModelSerializer):
+class CaseSerializer(serializers.HyperlinkedModelSerializer):
+
     class Meta:
         model = Case
-        fields = ['title', 'pub_date', 'case_text']
+        fields = ['url', 'id', 'title', 'pub_date', 'case_text']
 
 
-class CiteSerializer(serializers.ModelSerializer):
+class CiteSerializer(serializers.HyperlinkedModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.email')
     class Meta:
         model = Cite
-        fields = ['name', 'cite_text', 'owner']
+        fields = ['url', 'id', 'name', 'cite_text', 'owner']
 
 
 class UserSerializer(serializers.ModelSerializer):
-    cases = serializers.PrimaryKeyRelatedField(many=True, queryset=Case.objects.all())
-    cites = serializers.PrimaryKeyRelatedField(many=True, queryset=Cite.objects.all())
+    cites = serializers.HyperlinkedRelatedField(many=True, view_name='cite-detail', read_only=True)
 
     class Meta:
         model = CustomUser
-        fields = ['id', 'email', 'cites']
+        fields = ['url', 'id', 'email', 'cites']
