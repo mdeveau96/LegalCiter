@@ -1,6 +1,6 @@
 <template>
   <div>
-    This is the about page
+    This is the login view
   </div>
 </template>
 
