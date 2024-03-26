@@ -22,7 +22,7 @@ const links = [
 </script>
 
 <template>
-  <UContainer class="flex sticky top-0 z-40 bg-white dark:bg-gray-900 max-w-full">
+  <UContainer class="flex sticky top-0 z-40 bg-white dark:bg-neutral-800 max-w-full">
     <NuxtLink to="/" class="flex pr-8">
       <img src="/law-firm-icon-13.png" class="h-8 w-9 mt-2">
       <h1 class="font-sans font-bold text-2xl py-1.5 px-2 text-legal-950 dark:text-white">LegalCiter</h1>
@@ -34,7 +34,7 @@ const links = [
       </template>
     </UHorizontalNavigation>
     <UButton square
-      class="hover:bg-transparent dark:hover:bg-transparent hover:text-legal-500 dark:hover:text-legal-500 text-legal-800 dark:text-legal-800"
+      class="hover:bg-transparent dark:hover:bg-transparent hover:text-legal-800 dark:hover:text-legal-800 text-legal-500 dark:text-legal-500"
       color="legal" label="Sign Up" variant="ghost" to="/signup" />
     <UDivider orientation="vertical" size="2xs" class="w-auto py-2 ml-2" />
     <ClientOnly>

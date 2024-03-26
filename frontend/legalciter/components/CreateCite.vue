@@ -25,15 +25,15 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 <template>
     <UForm :schema="schema" :state="state" class="space-y-4" @submit="onSubmit">
         <UFormGroup label="Title" name="title">
-            <UInput v-model="state.title" placeholder="Case Title..."/>
+            <UInput v-model="state.title" placeholder="Case Title..." />
         </UFormGroup>
 
         <UFormGroup label="Case" name="caseName">
-            <UInput v-model="state.caseName" type="text" placeholder="Case Name..."/>
+            <UInput v-model="state.caseName" type="text" placeholder="Case Name..." />
         </UFormGroup>
 
         <UFormGroup label="Cite Text" name="casetext">
-            <UTextarea v-model="state.caseText" placeholder="Cite Text..."/>
+            <UTextarea v-model="state.caseText" placeholder="Cite Text..." />
         </UFormGroup>
 
         <UButton type="submit">

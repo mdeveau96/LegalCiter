@@ -7,7 +7,9 @@ body {
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 .dark {
-    background-color: rgb(31 41 55);
+    /* background-color: rgb(31 41 55); */
+    background-color: black;
+    border-color: rgb(243 244 246);
 }
 .light {
     background-color: rgb(243 244 246);

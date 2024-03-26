@@ -31,7 +31,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 </script>
 
 <template>
-    <UContainer class="flex justify-center">
+    <UContainer class="flex justify-center pt-6">
         <UCard class="size-96">
             <p>Thank you and welcome to LegalCiter.com! If you already have an account please log in <NuxtLink
                     class="text-blue-500 hover:text-blue-500 hover:underline" to="/login">here!</NuxtLink>
